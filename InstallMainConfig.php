@@ -62,7 +62,6 @@ define("IS_LOCALHOST", in_array(HTTP_HOST, ['localhost', '127.0.0.1']));
  * Server information guide:
  * returns project folder
  */
-\$ExpRqUri =  explode('/', \$_SERVER['REQUEST_URI'], 4);
 \$ProjectFolder = "{$ProjectFolder}";
 define("PROJECT_FOLDER", \$ProjectFolder);
 
