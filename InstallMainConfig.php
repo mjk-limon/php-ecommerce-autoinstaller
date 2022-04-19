@@ -146,6 +146,7 @@ CONTENT;
         }
 
         $Content = file_get_contents($defVarFile);
+        $Content = strtr($Content, array("<?php" => ""));
         $this->MainConfigFileContent .= $Content;
     }
 
