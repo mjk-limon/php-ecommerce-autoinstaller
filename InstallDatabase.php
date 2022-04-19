@@ -4,7 +4,7 @@ trait InstallDatabase
 {
     public function processDatabase()
     {
-        $DbFile = "./database.sql";
+        $DbFile = "../database.sql";
         $ConfigFile = self::docRoot("doc/includes/_ilm_cfg.php");
 
         if (!file_exists($DbFile)) {
