@@ -13,13 +13,14 @@ trait InstallMainConfig
 
     private function initMainConfigPresets()
     {
+        $ProjectFolder = dirname($_SERVER["REQUEST_URI"], 4) . "/";
         $this->MainConfigFileContent .= <<<CONTENT
-/*--------------------------------
-  * Global Configurations
-  * Very sensitive data
-  * Donot edit if unnecessary
-  * Edit may damage your website
---------------------------------*/
+/**
+ * Global Configurations
+ * Very sensitive data
+ * Donot edit if unnecessary
+ * Edit may damage your website
+ */
 
 /* if (!isset(\$_GET['TEST'])) {
     \$GamesIdArr = [23628, 22886, 24811, 24798, 24777, 24779];
@@ -39,32 +40,30 @@ error_reporting(E_ALL);
 date_default_timezone_set('Asia/Dhaka');
 require_once "_ilm_cfg.php";
 
-/*--------------------------------
-    * Server information guide:
-    * returns request protocol
---------------------------------*/
+/**
+ * Server information guide:
+ * returns request protocol
+ */
 \$Protocol = (isset(\$_SERVER['HTTPS']) &&
     (\$_SERVER['HTTPS'] == 'on' || \$_SERVER['HTTPS'] == 1) ||
     isset(\$_SERVER['HTTP_X_FORWARDED_PROTO']) &&
     \$_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') ? "https://" : "http://";
 define("PROTOCOL", \$Protocol);
 
-/*--------------------------------
-    * Server information guide:
-    * returns server hostname
---------------------------------*/
+/**
+ * Server information guide:
+ * returns server hostname
+ */
 \$HttpHost = \$_SERVER['HTTP_HOST'];
 define("HTTP_HOST", \$HttpHost);
 define("IS_LOCALHOST", in_array(HTTP_HOST, ['localhost', '127.0.0.1']));
 
-/*--------------------------------
-	 * Server information guide:
-	 * returns project folder
-	--------------------------------*/
+/**
+ * Server information guide:
+ * returns project folder
+ */
 \$ExpRqUri =  explode('/', \$_SERVER['REQUEST_URI'], 4);
-\$ProjectFolder = (in_array(HTTP_HOST, ['localhost', '127.0.0.1']))
-    ? "/" . \$ExpRqUri[1] . "/" . \$ExpRqUri[2] . "/"
-    : "/";
+\$ProjectFolder = "{$ProjectFolder}";
 define("PROJECT_FOLDER", \$ProjectFolder);
 
 \$base = PROTOCOL . HTTP_HOST . PROJECT_FOLDER;
