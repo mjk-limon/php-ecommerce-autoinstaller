@@ -21,8 +21,9 @@ class Install
 
     public function completeInstall()
     {
+        shell_exec("rm -rf autoinstaller");
         file_put_contents("../.installed", "true");
-        self::deleteDir("../autoinstaller/");
+        // self::deleteDir("../autoinstaller/");
     }
 
     public function docRoot($Path = null): string
@@ -38,10 +39,12 @@ class Install
 
         $files = array_diff(scandir($dir), array('.', '..'));
         foreach ($files as $file) {
-            (is_dir("{$dir}/{$file}") ?
-                self::deleteDir("{$dir}/{$file}") :
-                unlink("{$dir}/{$file}"));
+            if (is_dir("{$dir}/{$file}")) {
+                self::deleteDir("{$dir}/{$file}");
+                continue;
+            }
+            @unlink("{$dir}/{$file}");    
         }
-        return rmdir($dir);
+        return @rmdir($dir);
     }
 }
