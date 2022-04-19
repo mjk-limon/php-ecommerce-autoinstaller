@@ -23,7 +23,6 @@ class Install
     {
         file_put_contents("../.installed", "true");
         self::deleteDir("../autoinstaller/");
-        unlink("../autoinstaller.zip");
     }
 
     public function docRoot($Path = null): string
