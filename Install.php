@@ -21,9 +21,9 @@ class Install
 
     public function completeInstall()
     {
-        shell_exec("rm -rf autoinstaller");
+        // shell_exec("rm -rf autoinstaller");
         file_put_contents("../.installed", "true");
-        // self::deleteDir("../autoinstaller/");
+        self::deleteDir("../autoinstaller/");
     }
 
     public function docRoot($Path = null): string
