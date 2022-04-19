@@ -10,31 +10,24 @@ trait InstallAssets
 
     private function importAssetFiles()
     {
-        $LocalFile = "./tmpimport.zip";
-        $RemoteFile = "https://crm.dhakasolution.com/_ilmComm/assets/root-files.zip";
-
         if (!class_exists('ZipArchive')) {
             throw new Exception("Zip archive library missing !");
         }
 
-        if (copy($RemoteFile, $LocalFile)) {
-            $zip = new ZipArchive;
-            $res = $zip->open($LocalFile);
-            
-            if ($res === TRUE) {
-                $zip->extractTo(self::docRoot());
-                $zip->close();
+        $zip = new ZipArchive;
+        $res = $zip->open("root-files.zip");
 
-                if (!is_dir(self::docRoot("doc/includes"))) {
-                    mkdir(self::docRoot("doc/includes"), 0777, true);
-                }
-                return;
+        if ($res === TRUE) {
+            $zip->extractTo(self::docRoot());
+            $zip->close();
+
+            if (!is_dir(self::docRoot("doc/includes"))) {
+                mkdir(self::docRoot("doc/includes"), 0777, true);
             }
-
-            throw new \Exception("Invalid downloaded file !");
+            return;
         }
 
-        throw new \Exception("Could not download remote file !");
+        throw new \Exception("Invalid asset file !");
     }
 
     private function processAdminLink()
