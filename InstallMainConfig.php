@@ -14,6 +14,7 @@ trait InstallMainConfig
     private function initMainConfigPresets()
     {
         $ProjectFolder = dirname($_SERVER["REQUEST_URI"], 4) . "/";
+        $CustomerEmail = self::rec_arr_val($_SESSION, $this->SesKey . ",customer_email", "mjk.limon@gmail.com");
         $this->MainConfigFileContent .= <<<CONTENT
 /**
  * Global Configurations
@@ -76,24 +77,17 @@ define('DEFAULT_CURR', 'BDT');
 define('CURRENCY', \$currency);
 
 define("API_TOKEN", "");
-define("ADMIN_EMAIL", "mjk.limon@gmail.com");
-\$EmailToSend    = ADMIN_EMAIL;
+define("ADMIN_EMAIL", "{$CustomerEmail}");
+\$EmailToSend = ADMIN_EMAIL;
 
 define("MIN_PRID", "100100");
-\$min_prid        = MIN_PRID;
+\$min_prid = MIN_PRID;
 
 define("GOOGLE_MAP_API", "AIzaSyCM2ZcxLK4zaOcu8UCvyYxkFYP2j0a48_4");
-\$GoogleMapApi    = GOOGLE_MAP_API;
+\$GoogleMapApi = GOOGLE_MAP_API;
 
 define("MENU_TYPE", "3");
 \$menuType = MENU_TYPE;
-
-/*
- * Secondary Category for category insert manuel:
- * Boolean for existing secondary category
- */
-define("SECONDARY_CATEGORY", TRUE);
-\$secondary_category = SECONDARY_CATEGORY;
 
 /* Case 1 : Image
 Case 2 : Image Link

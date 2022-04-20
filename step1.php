@@ -47,6 +47,11 @@ if (isset($_POST["install"])) {
                     </div>
 
                     <div class="single-input-area">
+                        <label>Customer Email</label>
+                        <input type="text" class="single-input" name="customer_email" />
+                    </div>
+
+                    <div class="single-input-area">
                         <label>Admin Panel Suffix</label>
                         <input type="text" class="single-input" name="admin_link" required />
                     </div>

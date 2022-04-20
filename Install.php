@@ -12,26 +12,34 @@ class Install
     use InstallIlmConfig;
     use InstallMainConfig;
 
-    private $Data;
+    private $Data = [];
+    private $SesKey = "__ecom_autins_postd";
+
+    public function __construct()
+    {
+        @session_start();
+    }
 
     public function setPostedData(array $d)
     {
+        $CurrData = self::rec_arr_val($_SESSION, $this->SesKey, []);
+        $_SESSION[$this->SesKey] = array_merge($CurrData, $d);
+        
         $this->Data = $d;
     }
 
     public function completeInstall()
     {
-        // shell_exec("rm -rf autoinstaller");
         file_put_contents("../.installed", "true");
         self::deleteDir("../autoinstaller/");
     }
 
-    public function docRoot($Path = null): string
+    public static function docRoot($Path = null): string
     {
         return "../../../" . $Path;
     }
 
-    public function deleteDir(string $dir): bool
+    public static function deleteDir(string $dir): bool
     {
         if (!file_exists($dir)) {
             return false;
@@ -46,5 +54,17 @@ class Install
             @unlink("{$dir}/{$file}");    
         }
         return @rmdir($dir);
+    }
+
+    public static function rec_arr_val($v, $k, $d = "")
+    {
+        foreach (explode(",", $k) as $kv) {
+            if (isset($v[$kv])) {
+                $v = $v[$kv];
+                continue;
+            }
+            return $d;
+        }
+        return $v;
     }
 }
