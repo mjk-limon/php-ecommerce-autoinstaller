@@ -32,6 +32,7 @@ class Install
     {
         file_put_contents("../.installed", "true");
         self::deleteDir("../autoinstaller/");
+        unset($_SESSION[$this->SesKey]);
     }
 
     public static function docRoot($Path = null): string
