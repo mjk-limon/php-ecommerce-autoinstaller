@@ -4,20 +4,27 @@ trait InstallDatabase
 {
     public function processDatabase()
     {
-        $DbFile = "../database.sql";
+        // Config files path
         $ConfigFile = self::docRoot("doc/includes/_ilm_cfg.php");
+        $AutoloadFile = self::docRoot("doc/vendor/autoload.php");
 
-        if (!file_exists($DbFile)) {
-            throw new Exception("Database file not imported !");
+        if (!file_exists($ConfigFile) || !file_exists($AutoloadFile)) {
+            // Config files not exists
+            throw new Exception("Installation file error! Please re-install.");
         }
 
-        if (!file_exists($ConfigFile)) {
-            throw new Exception("Couldn't create config file !");
-        }
-        
+        // Include config files
         require $ConfigFile;
+        require $AutoloadFile;
 
-        $Sql = file_get_contents($DbFile);
-        $conn->multi_query($Sql);
+        // Get table structure and seeders
+        $TableStructure = include "../db/structure.php";
+        $Seeders = include "../db/seeders.php";
+
+        // Init Autoinstaller
+        $i = new _ilmComm\Core\DataBase\AutoInstaller;
+        $i->setTableStructure($TableStructure);
+        $i->setTableSeeders($Seeders);
+        $i->init();
     }
 }
