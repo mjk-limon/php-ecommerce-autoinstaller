@@ -35,9 +35,9 @@ trait InstallMainConfig
     ");
 } */
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
+ini_set('display_errors', 0);
+ini_set('display_startup_errors', 0);
+error_reporting(0);
 date_default_timezone_set('Asia/Dhaka');
 require_once "_ilm_cfg.php";
 
@@ -107,6 +107,7 @@ CONTENT;
     private function initMainConfigAdditionalVariables()
     {
         $defVarFile = self::docRoot("public/frontend_data/banner-slider.php");
+        
         if (!file_exists($defVarFile)) {
             $this->MainConfigFileContent .= <<<CONTENT
 \$categorySample = array(
