@@ -75,7 +75,7 @@ if (isset($_POST["install"])) {
         </div>
     </div>
 
-    <img src="https://crm.dhakasolution.com/_ilmComm/developers/docs/assets/images/logo.png" class="logo-stamp">
+    <img src="https://crm.dhakasolution.com/_ilmComm/developers/docs/api/assets/images/logo.png" class="logo-stamp">
 </body>
 
 </html>
