@@ -15,16 +15,16 @@ try {
     <p>Redirecting(<span id="timer">5</span>s) to main site.. </p>
 </div>
 <script type="text/javascript">
-    var initTimer = 5;
-    var timerElem = document.getElementById("timer");
-    
-    var interval = setInterval(function() {
-        initTimer--;
-        timerElem.innerHTML = initTimer;
+var initTimer = 5;
+var timerElem = document.getElementById("timer");
 
-        if (initTimer < 1) {
-            clearInterval(interval);
-            window.location.href = "../../";
-        }
-    }, 1000);
+var interval = setInterval(function() {
+    initTimer--;
+    timerElem.innerHTML = initTimer;
+
+    if (initTimer < 1) {
+        clearInterval(interval);
+        window.location.href = "../../";
+    }
+}, 1000);
 </script>
