@@ -4,6 +4,8 @@ trait InstallDatabase
 {
     public function processDatabase()
     {
+        global $conn;
+
         // Config files path
         $ConfigFile = self::docRoot("doc/includes/_ilm_cfg.php");
         $AutoloadFile = self::docRoot("doc/vendor/autoload.php");
