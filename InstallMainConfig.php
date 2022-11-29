@@ -89,16 +89,18 @@ define("GOOGLE_MAP_API", "AIzaSyCM2ZcxLK4zaOcu8UCvyYxkFYP2j0a48_4");
 define("MENU_TYPE", "3");
 \$menuType = MENU_TYPE;
 
-/* Case 1 : Image
-Case 2 : Image Link
-Case 3 : Image Heading
-Case 4 : Heading Link
-Case 5 : Text Line 1
-Case 6 : Text Line 1 Link
-Case 7 : Text Line 2
-Case 8 : Text Line 2 Link
-Case 9 : Text Line 3
-Case 10	: Text Line 3 Link */
+/**
+ * Case 1 : Image
+ * Case 2 : Image Link
+ * Case 3 : Image Heading
+ * Case 4 : Heading Link
+ * Case 5 : Text Line 1
+ * Case 6 : Text Line 1 Link
+ * Case 7 : Text Line 2
+ * Case 8 : Text Line 2 Link
+ * Case 9 : Text Line 3
+ * Case 10	: Text Line 3 Link
+ */
 
 
 CONTENT;
