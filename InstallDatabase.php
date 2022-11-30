@@ -7,7 +7,7 @@ trait InstallDatabase
         global $conn;
 
         // Config files path
-        $ConfigFile = self::docRoot("doc/includes/_ilm_cfg.php");
+        $ConfigFile = self::docRoot("doc/includes/config.php");
         $AutoloadFile = self::docRoot("doc/vendor/autoload.php");
 
         if (!file_exists($ConfigFile) || !file_exists($AutoloadFile)) {
