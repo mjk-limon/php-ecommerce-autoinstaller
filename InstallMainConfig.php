@@ -108,43 +108,32 @@ CONTENT;
 
     private function initMainConfigAdditionalVariables()
     {
-        $defVarFile = self::docRoot("public/frontend_data/banner-slider.php");
+        // default main config
+        $defVarFile = "default_main_config.json";
+        $defVars = json_decode(file_get_contents($defVarFile), true);
+
+        // main config from branch
+        $branchVarFile = self::docRoot("public/lib/etc/custom_settings.json");
+        $branchVars = file_exists($defVarFile) ? json_decode(file_get_contents($branchVarFile), true) : array();
         
-        if (!file_exists($defVarFile)) {
-            $this->MainConfigFileContent .= <<<CONTENT
-\$categorySample = array(
-    "Category icon" => array("total" => 1, "type" => "png", "width" => "19", "height" => "19"),
-    "Top ranking category icon" => array("total" => 1, "type" => "png", "width" => "300", "height" => "300"),
-    "Homepage category sample" => array("total" => 1, "type" => "jpg", "width" => "600", "height" => "430"),
-    "Product page banner" => array("total" => 3, "type" => "jpg", "width" => "900", "height" => "300")
-);
+        // processed main config vars
+        $addMainVars = array_merge($defVars, $branchVars);
 
-\$innerPages = array(
-    "about-us", "store-location", "term-of-use", "privacy-policy", "testimonials", "blog",
-    "photo-confirmations", "payment-methods", "locations-we-ship-to", "shipping-returns"
-);
+        foreach ($addMainVars as $smvKey => $smvVal) {
+            // variable value
+            $smvVal = var_export($smvVal, true);
 
-\$bannerToEdit = array(
-    "home page banners"    => array("page" => 'index', "position" => 1, "fields" => "2"),
-);
+            // variable name pre process
+            $smvKey = preg_replace_callback('/_([a-z])/', function ($val) {
+                return strtoupper($val[1]);
+            }, $smvKey);
 
-\$stickersToEdit = array(
-    "home page stickers top 1" => array("page" => 'index', "position" => 2, "fields" => "2"),
-    "home page stickers new arrival" => array("page" => 'index', "position" => 3, "fields" => "2")
-);
+            // add main config vars to file
+            $this->MainConfigFileContent .= <<<PHP
+\${$smvKey} = {$smvVal}
 
-\$stickersToEdit_NoDb = array();
-
-\$addPrOthers = array();
-
-
-CONTENT;
-            return;
+PHP;
         }
-
-        $Content = file_get_contents($defVarFile);
-        $Content = strtr($Content, array("<?php" => ""));
-        $this->MainConfigFileContent .= $Content;
     }
 
     private function writeMainConfigFile()
