@@ -24,7 +24,7 @@ var interval = setInterval(function() {
 
     if (initTimer < 1) {
         clearInterval(interval);
-        window.location.href = "../../";
+        window.location.href = "../../../";
     }
 }, 1000);
 </script>
