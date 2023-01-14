@@ -114,7 +114,7 @@ CONTENT;
 
         // main config from branch
         $branchVarFile = self::docRoot("public/lib/etc/custom_settings.json");
-        $branchVars = file_exists($defVarFile) ? json_decode(file_get_contents($branchVarFile), true) : array();
+        $branchVars = file_exists($branchVarFile) ? json_decode(file_get_contents($branchVarFile), true) : array();
         
         // processed main config vars
         $addMainVars = array_merge($defVars, $branchVars);
@@ -130,7 +130,8 @@ CONTENT;
 
             // add main config vars to file
             $this->MainConfigFileContent .= <<<PHP
-\${$smvKey} = {$smvVal}
+\${$smvKey} = {$smvVal};
+
 
 PHP;
         }
